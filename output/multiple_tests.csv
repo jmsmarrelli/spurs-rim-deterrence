@@ -1,0 +1,13 @@
+label,p,rank,threshold,survives_fdr
+Mid-Range share,0.0005,1,0.0042,True
+Corner 3 share,0.0015,2,0.0083,True
+Opponent field goal percentage at the rim,0.027,3,0.0125,False
+Points allowed per shot,0.027,4,0.0167,False
+Value of the shot mix allowed,0.087,5,0.0208,False
+Corner 3 conversion,0.329,6,0.025,False
+Above the Break 3 conversion,0.62,7,0.0292,False
+Mid-Range conversion,0.72,8,0.0333,False
+In The Paint (Non-RA) conversion,0.7865,9,0.0375,False
+Opponent rim-shot share,0.7925,10,0.0417,False
+In The Paint (Non-RA) share,0.93,11,0.0458,False
+Above the Break 3 share,0.969,12,0.05,False

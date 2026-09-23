@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method notes</title>
+<meta name="description" content="The design, the things that went wrong before it worked, and where it is weak.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+:root{
+  --surface:#fcfcfb; --raised:#f4f3ef; --ink:#0b0b0b; --ink-2:#43423f; --ink-3:#7d7b74;
+  --rule:#e3e2dc; --accent:#1c5cab; --mark:#eb6834;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --surface:#14140f; --raised:#1e1e18; --ink:#f2f1ec; --ink-2:#c9c7bf; --ink-3:#8d8b83;
+    --rule:#2e2e27; --accent:#7fb0f0; --mark:#f2895a;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--surface); color:var(--ink);
+  font:400 17px/1.62 "Source Sans 3","Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-feature-settings:"kern" 1;
+}
+.wrap{max-width:1020px;margin:0 auto;padding:0 22px}
+.bar{border-bottom:1px solid var(--rule);background:var(--surface)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:baseline;padding-top:16px;padding-bottom:15px}
+.bar .slug{
+  font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12.5px;letter-spacing:.02em;color:var(--ink-2)
+}
+.bar nav{margin-left:auto;display:flex;gap:18px}
+.bar a{
+  font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:12.5px;color:var(--ink-3);text-decoration:none;border-bottom:1px solid transparent
+}
+.bar a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+main{padding:0 0 96px}
+.col{max-width:700px}
+h1{
+  font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:700;font-size:clamp(30px,5.4vw,46px);line-height:1.08;
+  letter-spacing:-.022em;margin:54px 0 20px;max-width:640px
+}
+h2{
+  font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:600;font-size:22px;line-height:1.24;letter-spacing:-.012em;
+  margin:52px 0 14px;max-width:700px
+}
+h3{font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:600;
+  font-size:18.5px;letter-spacing:-.008em;margin:40px 0 8px}
+p.meta{font-size:14.5px;color:var(--ink-3);margin:-2px 0 16px}
+p.meta a{border-bottom-color:transparent}
+p.meta a:hover{border-bottom-color:currentColor}
+p{margin:0 0 18px;max-width:700px}
+p strong{font-weight:600}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(28,92,171,.32)}
+a:hover{border-bottom-color:currentColor}
+hr{border:0;border-top:1px solid var(--rule);margin:46px 0}
+ul,ol{margin:0 0 18px;padding-left:22px;max-width:700px}
+li{margin:0 0 8px}
+li>p{margin:0 0 8px}
+code{
+  font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.86em;background:var(--raised);padding:.12em .34em;border-radius:3px
+}
+pre{
+  background:var(--raised);border:1px solid var(--rule);border-radius:5px;
+  padding:15px 17px;overflow-x:auto;margin:0 0 22px;max-width:820px
+}
+pre code{background:none;padding:0;font-size:13px;line-height:1.55}
+em{color:var(--ink-2)}
+.tw{overflow-x:auto;margin:0 0 26px;max-width:980px}
+table{border-collapse:collapse;font-size:14.5px;min-width:100%}
+th,td{padding:7px 15px 7px 0;text-align:left;border-bottom:1px solid var(--rule);white-space:nowrap}
+th{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  font-size:11.5px;text-transform:uppercase;letter-spacing:.055em;
+  color:var(--ink-3);font-weight:500;border-bottom-color:var(--ink-3);white-space:normal
+}
+td.num{text-align:right;font-variant-numeric:tabular-nums;padding-right:22px}
+th.num{text-align:right;padding-right:22px}
+tbody tr:last-child td{border-bottom:0}
+figure{margin:30px 0 34px;max-width:980px}
+figure img{display:block;width:100%;height:auto;border:1px solid var(--rule);border-radius:4px}
+.foot{border-top:1px solid var(--rule);padding:22px 0 40px}
+.foot .wrap{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  font-size:11.5px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px 20px
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .wrap{padding:0 16px}
+  h1{margin-top:36px}
+  th,td{padding-right:14px}
+}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap"><span class="slug">spurs-rim-deterrence</span><nav><a href="../index.html">findings</a><a href="https://github.com/jmsmarrelli/spurs-rim-deterrence">repository</a><a href="https://jmsmarrelli.github.io/basketball-analytics/">all projects</a></nav></div></header>
+<main><div class="wrap">
+<h1>Method notes</h1>
+<p>The design, the things that went wrong before it worked, and where it is weak.</p>
+<h2>The estimator</h2>
+<p>For each of San Antonio's games <em>g</em> against opponent <em>o</em> in season <em>s</em>, and each
+measure <em>m</em> (a zone share, a conversion rate, a value):</p>
+<pre><code>d_m(g) = m(o in game g) − m(o in all its other games in season s)
+</code></pre>
+<p>then center <code>d_m</code> on its own season's Spurs mean, and take</p>
+<pre><code>effect = mean(d_m | subject played) − mean(d_m | subject missed)
+</code></pre>
+<p>Intervals come from resampling games with replacement inside each group, 4,000
+draws. Conversion rates are weighted by attempts in the relevant zone, because a
+game in which the opponent took three shots at the rim carries three shots of
+evidence about rim defense, not one game of it.</p>
+<h2>Three corrections, in the order I needed them</h2>
+<p><strong>Opponent baselines.</strong> The first version compared what San Antonio allowed to
+the league average. That is a schedule effect wearing an analysis costume: a
+defense plays a specific set of opponents, and the twenty-nine other teams are
+not a counterfactual for them.</p>
+<p><strong>Within-season centering.</strong> The second version compared games across both
+seasons at once, and produced a placebo panel with obviously wrong entries in it
+— Chris Paul and Harrison Barnes at 82 games on and 82 off, Stephon Castle at 81
+and 83, all of them really measuring one season against the other rather than one
+player against his absence. Centering <code>d_m</code> within season sends any purely between-season split to
+zero, which is what it is worth.</p>
+<p><strong>A within-season split requirement.</strong> Centering alone is not enough: a player who
+appeared in only one of the two seasons still gets an interval, and it is
+confidently wrong. The placebo cohort now requires at least six games on each
+side of the split <em>inside a single season</em>, which drops three players and leaves
+seventeen.</p>
+<h2>Availability without a minutes column</h2>
+<p>The shot files have no minutes and no inactive list, so a player counts as
+available in a game if he attempted a field goal in it.</p>
+<p>What this misses is an appearance with zero attempts. For a rotation player over
+two seasons that is a game or two. It is worth naming rather than hiding, because
+it biases in a specific direction: a player who checked in for ninety seconds and
+never shot is filed as absent, which makes his "off" sample very slightly more
+like his "on" sample and pulls every estimate a hair toward zero.</p>
+<p>The cross-check available without minutes data is the count itself: Wembanyama
+resolves to 71 games in 2023-24 and 46 in 2024-25, which matches the games he is
+publicly recorded as playing.</p>
+<h2>Why the placebo panel is not optional</h2>
+<p>Any on/off design confounds the player with everything correlated with his
+absence. Over two seasons that includes the rest of the injury list, the trade
+deadline, the coach's rotation, and — in this case — a stretch of the second
+season during which the team had no reason to compete.</p>
+<p>None of that is separable at 164 games. What <em>is</em> available is the shape of the
+confound: run the same estimator on players whose presence has no plausible
+bearing on where opponents shoot, and read the subject against them. That does
+not identify a causal effect. It does distinguish "this is a real signal about
+this player" from "this is what the estimator returns for anybody on this roster",
+and on the rim-share measure it returns the second answer.</p>
+<h2>Multiple testing</h2>
+<p>Twelve distinct tests on one player: a share and a conversion rate in each of
+five zones, plus two summary measures across all of them. The four headline
+measures in <code>output/on_off.csv</code> are only two additional tests, because the two
+rim headlines are the restricted-area zone tests under a different name and are
+counted once rather than twice — entering them twice would inflate the family
+size and make the correction look more conservative than it is.</p>
+<p>At 5% each, the expected number of false positives is 0.6. Four results cleared
+0.05 before correction, which is more than chance would ordinarily hand you and
+much less than four independent findings.</p>
+<p>The whole family goes through Benjamini–Hochberg at 5%. Mid-range share
+(p = 0.0005) and corner-three share (p = 0.0015) survive it. Rim conversion and
+points allowed per shot, both at p = 0.027, do not. <code>output/multiple_tests.csv</code>
+reports every test with its threshold, including the ones that failed.</p>
+<p>This is the part of the project that most changes what it is safe to say. Without
+the correction the natural headline is "he cuts rim conversion by three points";
+with it, that result is a lead worth following rather than a finding worth
+publishing.</p>
+<h2>What I tried that did not work</h2>
+<p><strong>A shot-quality model instead of zone shares.</strong> A gradient-boosted expected-value
+model on coordinates gives a finer measure of the shots allowed, and at 164 games
+it added nothing the five zones did not already carry while making the estimate
+harder to explain. The zone version is in the repository; the model version is
+not, because it did not earn its complexity here.</p>
+<p><strong>Splitting by home and away.</strong> The direction is the same on both, the samples
+halve, and the intervals stop meaning anything.</p>
+<p><strong>Restricting to games the subject started.</strong> The shot files carry no lineup or
+starter field, so there is no way to do this here at all. It is the check I would
+run first with a play-by-play feed attached.</p>
+<h2>Where this is weakest</h2>
+<p><strong>No possessions.</strong> Everything here is per <em>attempt</em>. A defense that forces
+turnovers is better than one that does not, and this data cannot see a
+possession that ends without a shot. Wembanyama's block rate is exactly the kind
+of event that would show up as "fewer attempts" and is invisible in a file whose
+rows are attempts.</p>
+<p><strong>Two seasons is not enough for the intervals to be interesting.</strong> The
+rim-conversion effect has a 95% interval running from −6.3 to −0.4 percentage
+points, which is the difference between "one of the best rim protectors on
+record" and "slightly better than nobody". A third season narrows it by about a
+fifth, not by half — the interval scales with the square root of the sample, and
+two seasons of one team's opponents is not many rim attempts. Only time fixes
+this.</p>
+<p><strong>The subject's absences are not random.</strong> He missed the end of 2024-25 with a
+condition that was announced mid-season. If the team's behavior changed for
+other reasons at the same moment — and a team out of contention in March behaves
+differently — the design absorbs that into his effect. The within-season centering
+handles the level shift; it does not handle a mid-season change in how the team
+played.</p>
+</div></main>
+<footer class="foot"><div class="wrap"><span>spurs-rim-deterrence</span><span>figures and tables regenerated by the pipeline in this repository</span></div></footer>
+</body>
+</html>

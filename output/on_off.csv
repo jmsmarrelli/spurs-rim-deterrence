@@ -1,0 +1,5 @@
+metric,label,unit,n_on,n_off,on,off,effect,lo,hi,p,scaled_effect,scaled_lo,scaled_hi
+rim_share,Opponent rim-shot share,pp,117,47,-0.00101,0.00252,-0.00354,-0.02907,0.02214,0.7925,-0.35362,-2.90746,2.21421
+rim_fg,Opponent field goal percentage at the rim,pp,117,47,-0.01917,0.01402,-0.03319,-0.06321,-0.00417,0.027,-3.31909,-6.32102,-0.41691
+shot_quality,Value of the shot mix allowed,pts/shot,117,47,-0.00241,0.00601,-0.00842,-0.01772,0.00128,0.087,-0.00842,-0.01772,0.00128
+points,Points allowed per shot,pts/shot,117,47,-0.01704,0.03299,-0.05003,-0.09639,-0.00527,0.027,-0.05003,-0.09639,-0.00527
