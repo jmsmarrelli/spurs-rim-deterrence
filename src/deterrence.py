@@ -1,6 +1,6 @@
 """The measurement.
 
-A defense that deters shots at the rim shows up in one place a public shot file
+A defence that deters shots at the rim shows up in one place a public shot file
 can see: opponents stop taking them. That is the whole instrument here, and it is
 narrower than "defensive impact" - it says nothing about whether the shots they
 do take go in, or about the possessions that end in a turnover.

@@ -8,8 +8,8 @@ one-sided until you ask the question the arithmetic actually poses, which is not
 "which shot is worth more" but "what would the *marginal* shot convert at".
 
 His average rim attempt is worth 1.51 points. That number describes the rim
-attempts a defense gave him. The rim attempts he would have to manufacture by
-declining an open three are, by construction, the ones the defense did not want
+attempts a defence gave him. The rim attempts he would have to manufacture by
+declining an open three are, by construction, the ones the defence did not want
 to give up, and nothing in a shot file says what those are worth.
 
 So this stage does not answer the question. It prices it: the break-even
@@ -156,7 +156,7 @@ def fig_market(pz: pd.DataFrame, season: int) -> None:
     L.place(ax, tag["fga"], tag["pps"], tag["player"], colour=S.INK)
     S.caption(fig, f"Players with {MIN_FGA}+ total attempts and 100+ above the break. The six "
                    "highest-volume shooters are named, and so is he. Volume like that from a "
-                   "center is the thing without precedent here, not the accuracy.")
+                   "centre is the thing without precedent here, not the accuracy.")
     fig.savefig(FIG / "06_three_point_market.png")
     plt.close(fig)
 

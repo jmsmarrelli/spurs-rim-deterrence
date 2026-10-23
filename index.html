@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What Wembanyama actually changes</title>
-<meta name="description" content="The public shot files reach 2024-25. The play-by-play mirror the rest of these projects read from (hoopR-data) stops at 2022-23, so this study has no lineup data for his first two ">
+<title>Wembanyama availability and opponent shot profiles</title>
+<meta name="description" content="Does San Antonio face a different shot profile in games where Victor Wembanyama records a field-goal attempt? This study compares his first two regular seasons, 2023–24 and 2024–25">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
 <style>
 :root{
@@ -99,240 +99,183 @@ figure img{display:block;width:100%;height:auto;border:1px solid var(--rule);bor
 </style>
 </head>
 <body>
-<header class="bar"><div class="wrap"><span class="slug">spurs-rim-deterrence</span><nav><a href="docs/method.html">method</a><a href="https://github.com/jmsmarrelli/spurs-rim-deterrence">repository</a><a href="https://jmsmarrelli.github.io/basketball-analytics/">all projects</a></nav></div></header>
+<header class="bar"><div class="wrap"><span class="slug">spurs-rim-deterrence</span><nav><a href="docs/method.html">method</a></nav></div></header>
 <main><div class="wrap">
-<h1>What Wembanyama actually changes</h1>
-<p>The public shot files reach 2024-25. The play-by-play mirror the rest of these
-projects read from (hoopR-data) stops at 2022-23, so this study has no lineup
-data for his first two seasons and cannot build an on-court/off-court split the
-usual way.</p>
-<p>There is another way. He missed 47 of San Antonio's 164 games across his first
-two seasons, and every shot either team took in all 164 is on record. That is a
-game-level on/off, and with the right controls it is enough to ask a specific
-question: <strong>does the shot chart look different when he plays?</strong></p>
-<p>148,626 opponent attempts and 147,888 Spurs attempts across 1,767 games,
-2003-04 to 2024-25.</p>
-<hr>
-<h2>The claim, and what the data says about it</h2>
-<p>The thing said about him more than anything else is that opponents stop going to
-the rim. It is the first-order description of a 7'4" defender with an eight-foot
-wingspan, and it is the one claim here that a game-level design cannot confirm.</p>
-<p><strong>Opponent rim-shot share, with him minus without: −0.35 percentage points, 95%
-interval −2.91 to +2.21, p = 0.79.</strong> At the level of whole games, no detectable
-change.</p>
-<p>That is not the same as no effect, and the reason is the design. A game-level
-split spreads whatever happens during his minutes across the eighteen or so
-minutes a night he sits, and the comparison group is 47 games. An effect of four
-or five points during his minutes would land at about −3 points over a whole
-game — right at the edge of this interval. The instrument is too blunt to tell
-those two stories apart. Running the identical estimator on every Spur who
-missed enough games puts him <strong>seventh of seventeen</strong>, which says the same thing
-from the other side: at this resolution his games do not look different from
-anyone else's.</p>
-<p>With lineups, the answer sharpens. A minute-level version of the same question
-for 2025-26, built from reconstructed substitutions in the separate
-<code>spurs-research</code> repository, puts opponents' rim share <strong>4.6 points lower during
-his minutes</strong>, interval −7.0 to −2.3. That is the better instrument, and it is
-the number to quote.</p>
-<figure><img loading="lazy" alt="Placebo" src="figures/03_placebo.png"></figure>
-<p>Zoom out and the same thing is visible without any model. San Antonio's opponents
-have taken a larger share of their shots at the rim than the league average in
-every season since 2020-21, including both of his.</p>
-<figure><img loading="lazy" alt="Rim share history" src="figures/01_rim_share_history.png"></figure>
-<hr>
-<h2>What does change</h2>
-<p>Four measures of the same defense, each game scored against what that opponent
-shot in its <em>other</em> games that season:</p>
-<figure><img loading="lazy" alt="Measures" src="figures/02_measures.png"></figure>
+<h1>Wembanyama availability and opponent shot profiles</h1>
+<p>Does San Antonio face a different shot profile in games where Victor Wembanyama records a field-goal attempt? This study compares his first two regular seasons, 2023–24 and 2024–25, using whole-game shot files. It addresses an availability association; it does not measure his on-court defensive effect.</p>
+<p>Each game's opponent profile is compared with that opponent's other games in the same season. Within-season centering reduces between-season roster differences. Presence is inferred from at least one recorded attempt, so appearances without an attempt can be misclassified.</p>
+<h2>What the comparison shows</h2>
 <div class="tw"><table>
 <thead>
 <tr>
-<th></th>
-<th>With − without</th>
-<th>95% interval</th>
-<th>p</th>
+<th>Label</th>
+<th>Unit</th>
+<th>Estimate</th>
+<th>95% lower</th>
+<th>95% upper</th>
+<th>p-value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Opponent rim-shot share</td>
-<td>−0.35 pp</td>
-<td>−2.91 to +2.21</td>
-<td class="num">0.79</td>
+<td>pp</td>
+<td class="num">-0.354</td>
+<td class="num">-2.907</td>
+<td class="num">2.214</td>
+<td class="num">0.7925</td>
 </tr>
 <tr>
-<td>Opponent field goal % at the rim</td>
-<td><strong>−3.32 pp</strong></td>
-<td>−6.32 to −0.42</td>
-<td class="num">0.027</td>
+<td>Opponent field goal percentage at the rim</td>
+<td>pp</td>
+<td class="num">-3.319</td>
+<td class="num">-6.321</td>
+<td class="num">-0.417</td>
+<td class="num">0.0270</td>
 </tr>
 <tr>
 <td>Value of the shot mix allowed</td>
-<td>−0.008 pts/shot</td>
-<td>−0.018 to +0.001</td>
-<td class="num">0.087</td>
+<td>pts/shot</td>
+<td class="num">-0.008</td>
+<td class="num">-0.018</td>
+<td class="num">0.001</td>
+<td class="num">0.0870</td>
 </tr>
 <tr>
 <td>Points allowed per shot</td>
-<td class="num"><strong>−0.050</strong></td>
-<td>−0.096 to −0.005</td>
-<td class="num">0.027</td>
+<td>pts/shot</td>
+<td class="num">-0.050</td>
+<td class="num">-0.096</td>
+<td class="num">-0.005</td>
+<td class="num">0.0270</td>
 </tr>
 </tbody>
 </table></div>
-<p>Opponents go to the rim exactly as often and convert three points worse when they
-get there. That is rim protection without deterrence — a different mechanism from
-the one in the broadcast, and arguably a more valuable one, because a contested
-attempt at the rim is a worse possession for the offense than a pass out to a
-shooter.</p>
-<p>But the zone breakdown is where the real finding is, and it is not about the rim
-at all:</p>
+<p>Source: <a href="output/on_off.csv">on_off.csv</a>.</p>
+<p>The rim-share interval includes both a decrease and an increase. This analysis therefore does not establish either deterrence or its absence. A nonsignificant result is not an equivalence test, and the teammate comparison is not a power calculation.</p>
+<figure><img loading="lazy" src="figures/02_measures.png" alt="Whole-game availability comparisons" /></figure>
+<p>The zone results are exploratory associations. The multiple-testing table reports the full family of twelve comparisons, including those that do not survive correction. The original rim-conversion and points-per-shot p-values alone are insufficient to claim confirmed effects after that correction.</p>
 <div class="tw"><table>
 <thead>
 <tr>
-<th>Zone</th>
-<th>Change in share</th>
-<th>95% interval</th>
+<th>Label</th>
+<th>p-value</th>
+<th>Rank</th>
+<th>Threshold</th>
+<th>Survives fdr</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>At the rim</td>
-<td>−0.35 pp</td>
-<td>−2.91 to +2.21</td>
+<td>Mid-Range share</td>
+<td class="num">0.0005</td>
+<td class="num">1.000</td>
+<td class="num">0.004</td>
+<td>True</td>
 </tr>
 <tr>
-<td>Paint, off the rim</td>
-<td>+0.10 pp</td>
-<td>−2.18 to +2.25</td>
+<td>Corner 3 share</td>
+<td class="num">0.0015</td>
+<td class="num">2.000</td>
+<td class="num">0.008</td>
+<td>True</td>
 </tr>
 <tr>
-<td><strong>Mid-range</strong></td>
-<td><strong>+2.15 pp</strong></td>
-<td>+1.05 to +3.28</td>
+<td>Opponent field goal percentage at the rim</td>
+<td class="num">0.0270</td>
+<td class="num">3.000</td>
+<td class="num">0.013</td>
+<td>False</td>
 </tr>
 <tr>
-<td><strong>Corner three</strong></td>
-<td><strong>−1.89 pp</strong></td>
-<td>−3.13 to −0.69</td>
+<td>Points allowed per shot</td>
+<td class="num">0.0270</td>
+<td class="num">4.000</td>
+<td class="num">0.017</td>
+<td>False</td>
 </tr>
 <tr>
-<td>Above-the-break three</td>
-<td>−0.00 pp</td>
-<td>−1.72 to +1.72</td>
+<td>Value of the shot mix allowed</td>
+<td class="num">0.0870</td>
+<td class="num">5.000</td>
+<td class="num">0.021</td>
+<td>False</td>
+</tr>
+<tr>
+<td>Corner 3 conversion</td>
+<td class="num">0.3290</td>
+<td class="num">6.000</td>
+<td class="num">0.025</td>
+<td>False</td>
+</tr>
+<tr>
+<td>Above the Break 3 conversion</td>
+<td class="num">0.6200</td>
+<td class="num">7.000</td>
+<td class="num">0.029</td>
+<td>False</td>
+</tr>
+<tr>
+<td>Mid-Range conversion</td>
+<td class="num">0.7200</td>
+<td class="num">8.000</td>
+<td class="num">0.033</td>
+<td>False</td>
+</tr>
+<tr>
+<td>In The Paint (Non-RA) conversion</td>
+<td class="num">0.7865</td>
+<td class="num">9.000</td>
+<td class="num">0.037</td>
+<td>False</td>
+</tr>
+<tr>
+<td>Opponent rim-shot share</td>
+<td class="num">0.7925</td>
+<td class="num">10.000</td>
+<td class="num">0.042</td>
+<td>False</td>
+</tr>
+<tr>
+<td>In The Paint (Non-RA) share</td>
+<td class="num">0.9300</td>
+<td class="num">11.000</td>
+<td class="num">0.046</td>
+<td>False</td>
+</tr>
+<tr>
+<td>Above the Break 3 share</td>
+<td class="num">0.9690</td>
+<td class="num">12.000</td>
+<td class="num">0.050</td>
+<td>False</td>
 </tr>
 </tbody>
 </table></div>
-<p>With him on the floor, opponents take fewer corner threes and more mid-range
-shots. Those are the two ends of the shot-value scale — a corner three is worth
-1.16 points across this data and a mid-range shot 0.80 — and the trade runs in
-San Antonio's favor on every attempt it happens.</p>
-<figure><img loading="lazy" alt="Court shift" src="figures/04_court_shift.png"></figure>
-<p><strong>Twelve distinct tests were run on one player</strong> — two summary measures plus a
-share and a conversion rate in each of five zones — so the whole family goes
-through a Benjamini–Hochberg pass at 5%. Four of the twelve cleared 0.05 on
-their own. Two survive the correction: mid-range share (p = 0.0005) and
-corner-three share (p = 0.0015). The rim conversion effect and points allowed
-per shot, both at p = 0.027, do not. <code>output/multiple_tests.csv</code> has the full
-table, including the results that did not make it.</p>
-<p>So the defensible version of what <em>this</em> data shows is narrow: the one thing that
-reliably moves in the games Wembanyama plays is where opponents shoot from
-<em>outside</em> the paint. The rim numbers point the right way and a game-level split
-is not strong enough to claim them.</p>
-<hr>
-<h2>The other argument</h2>
-<p>In 2024-25 he attempted <strong>369 above-the-break threes and 207 shots at the rim</strong>.
-Above the break was 43% of his shot diet against a league rate of 31%; the rim
-was 24% against 28%. In his rookie season those numbers were 31% and 33%.</p>
-<figure><img loading="lazy" alt="Shot mix" src="figures/05_shot_mix.png"></figure>
-<p>His rim attempts were worth <strong>1.51 points each</strong>, against a league average of
-1.33 from the same zone. His above-the-break threes were worth <strong>1.08</strong>, against
-a league average of 1.06 — which ranks him <strong>115th of 223</strong> qualified shooters,
-and <strong>35th in volume</strong>.</p>
-<figure><img loading="lazy" alt="Three point market" src="figures/06_three_point_market.png"></figure>
-<p>The obvious conclusion is that he should trade threes for rim attempts, and the
-obvious conclusion is answering a question the arithmetic does not pose. His 1.51
-describes the rim attempts a defense <em>gave</em> him. The ones he would manufacture by
-declining an open look are, by construction, the ones a defense chose not to give
-up, and no shot file says what those are worth.</p>
-<p>What the file can do is price the decision:</p>
-<figure><img loading="lazy" alt="Break-even" src="figures/07_breakeven.png"></figure>
-<p><strong>Break-even is 54.1%.</strong> A traded attempt has to go in more than 54.1% of the
-time to be worth making — against his actual rim rate of 75.4%, and against the
-league's 2024-25 restricted-area rate of 66%. Trading 150 above-the-break threes for rim attempts
-over a season is worth +63 points if those attempts convert like his current
-ones, +33 at 65%, +3 at 55%, and −27 at 45%.</p>
-<p>Two things bias that in opposite directions and neither is in the data. Free
-throws are absent, which undersells every attempt at the rim, because attacking
-it draws fouls. And whatever his shooting does to the floor his teammates play on
-does not show up on his own line at all. The honest summary is that the trade is
-favorable across most plausible assumptions and the margin is a win or two, not
-a transformation.</p>
-<hr>
-<h2>Why the controls are the project</h2>
-<p>Three of them do most of the work, and the estimate is meaningless without any
-one.</p>
-<p><strong>Every game is scored against the opponent's own baseline.</strong> Not the league
-average — what that specific opponent shot in its <em>other</em> games that season.
-Denver goes to the rim more than Boston; a schedule is not a random draw; and the
-games a player misses are not a random draw from the schedule. Differencing
-against the opponent's own year removes all three at once.</p>
-<p><strong>Every comparison is inside a season.</strong> Without it, a player who arrived for one
-of the two years gets handed the difference between two rosters as his personal
-effect. Chris Paul played 82 games for San Antonio and missed 82; both numbers
-are one whole season, and his uncorrected "on/off" is just 2024-25 minus 2023-24.
-Centering within season sends that to zero, where it belongs.</p>
-<p><strong>Everyone gets the same estimator.</strong> The placebo panel is not a courtesy. An
-on/off design cannot separate one player from everything else that changed while
-he sat, and the only way to find out whether it is measuring a player or a season
-is to run it on people whose presence should not matter.</p>
-<hr>
-<h2>What this cannot do</h2>
-<ul>
-<li><strong>Blocks, fouls, turnovers and rebounds are all invisible.</strong> This is a field
-  goal file. A defender who ends possessions without a shot attempt is
-  undercounted by exactly the amount he is good at it.</li>
-<li><strong>Presence is inferred from attempts.</strong> No minutes column exists, so a player
-  counts as available in a game if he took a shot in it. For a rotation player
-  that misses a game or two a year.</li>
-<li><strong>It is a team effect measured in his presence.</strong> He and Jeremy Sochan and Zach
-  Collins missed overlapping stretches, and no game-level design can pull them
-  apart. The placebo panel bounds how much of the estimate the roster explains;
-  it does not eliminate it.</li>
-<li><strong>Two seasons, 164 games.</strong> The intervals are wide because the sample is small,
-  and they are reported wide rather than narrowed by a choice of test.</li>
-<li><strong>Regular season only.</strong></li>
-</ul>
-<hr>
-<h2>Running it</h2>
-<pre><code class="language-bash">pip install -r requirements.txt
-python src/run_01_build.py       # raw shot files -&gt; Spurs games and opponent baselines
-python src/run_02_deterrence.py  # the on/off design, figures 01-04
-python src/run_03_offense.py     # his own shot diet and the trade, figures 05-07
+<p>Source: <a href="output/multiple_tests.csv">multiple_tests.csv</a>.</p>
+<figure><img loading="lazy" src="figures/03_placebo.png" alt="Teammate availability comparisons" /></figure>
+<p>Teammates share absences, opponents and lineup changes. Applying the same estimator to them reveals sensitivity to availability patterns; it neither makes them valid negative controls nor separates Wembanyama from the surrounding roster.</p>
+<h2>A separate offensive decision</h2>
+<p>His own shot profile supports a break-even exercise: how efficient would additional rim attempts need to be to equal the field-goal points from the threes being replaced?</p>
+<figure><img loading="lazy" src="figures/07_breakeven.png" alt="Break-even shot substitution" /></figure>
+<p>This is conditional arithmetic, not an instruction to manufacture a fixed number of rim attempts. The opportunities being added may be harder than the ones already taken. Free throws, turnovers, spacing for teammates and defensive reactions are outside the calculation. The model does not estimate extra wins.</p>
+<h2>Basketball use and next validation</h2>
+<p>The useful coaching follow-up is to review matched possessions for changes in help position and corner coverage, while separating minutes with and without the player. Whole-game shot files cannot perform that separation. The existing result can guide film questions; it cannot settle what Wembanyama causes opponents to do.</p>
+<p>Data ends in 2024–25. This is a historical study, not a current availability report.</p>
+<h2>Reproduce</h2>
+<p>The historical analysis used Python 3.12 with the pinned dependencies below. From this repository:</p>
+<pre><code class="language-bash">python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+make fetch-data PY=python
+make all PY=python
+make report site PY=python
 </code></pre>
-<p>Or <code>make all</code>. Under a minute end to end.</p>
-<pre><code>src/
-  config.py        paths, seasons, the sample floors
-  features.py      raw rows -&gt; features, coordinate repair, heave filter
-  deterrence.py    the estimator: baselines, centring, weighting, bootstrap
-  court.py         half-court drawing in the data's own coordinates
-  labels.py        collision-resolving point labels
-  style.py         one place that decides what every figure looks like
-  run_0*.py        the pipeline, in order
-output/            every number quoted above, as CSV
-figures/           seven figures, regenerated from scratch by the pipeline
-docs/method.md     longer notes, including what did not work
-</code></pre>
-<h2>Data</h2>
-<p>Shot-level files from <a href="https://github.com/DomSamangy/NBA_Shots_04_24">DomSamangy/NBA_Shots_04_24</a>,
-which packages the NBA's public shot chart endpoint by season. <code>data/README.md</code>
-has the fetch step.</p>
-<p>Three of the twenty-two season files are published on a different coordinate
-scale from the other nineteen. <code>features.normalise_coordinates</code> detects and
-inverts it, and <code>output/build_audit.csv</code> records which seasons were repaired.</p>
-<h2>License</h2>
-<p>MIT. See <code>LICENSE</code>.</p>
+<p><code>make all</code> verifies source hashes before running the analyses in order. A missing or changed input stops the build. Data downloads need network access; article rendering uses the included result tables. See <a href="data/source_manifest.json">the source manifest</a>, <a href="docs/method.md">method notes</a> and <a href="VALIDATION_CURRENT.md">current validation record</a> for the distinction between a source rebuild and checks of delivered outputs.</p>
+<p>Season keys in CSV files use the <strong>ending year</strong>: <code>2025</code> means 2024–25. Display tables use full season labels. The MIT license covers code; third-party data retain their providers' rights and terms.</p>
+<p><a href="https://github.com/jmsmarrelli/basketball-analytics">Portfolio</a> · <a href="PROVENANCE.md">AI assistance and provenance</a></p>
+
 </div></main>
-<footer class="foot"><div class="wrap"><span>spurs-rim-deterrence</span><span>figures and tables regenerated by the pipeline in this repository</span></div></footer>
+<footer class="foot"><div class="wrap"><span>spurs-rim-deterrence</span><span>source, results and validation notes in the repository</span></div></footer>
 </body>
 </html>
