@@ -3,7 +3,7 @@
     python src/run_02_deterrence.py
 
 Runs the on/off design over 2023-24 and 2024-25 across four measures of a
-defense: where opponents shot from, whether those shots went in, the value of the
+defence: where opponents shot from, whether those shots went in, the value of the
 mix they ended up with, and what they actually scored. Then runs the identical
 estimator on every teammate with a real within-season split, so the subject's
 numbers can be read against the roster's own spread instead of against zero.
@@ -151,10 +151,7 @@ def fig_measures(results: pd.DataFrame) -> None:
     axes[1].set_title("What it was worth", loc="left", pad=30)
     axes[0].text(0.0, 1.04, "Orange: the 95% interval excludes zero.   Grey: it does not.",
                  transform=axes[0].transAxes, fontsize=9, color=S.INK_2)
-    S.caption(fig, "With Wembanyama minus without, every game scored against what that opponent "
-                   "shot in its other games that season, centered within season. Bars are 95% "
-                   "bootstrap intervals over games. Where opponents shoot from barely moves. "
-                   "What happens when they get there moves a lot.")
+    S.caption(fig, 'Whole-game association: games with a recorded Wembanyama attempt minus other games, adjusted for the opponent’s other games and centered within season. Bars are pointwise 95% bootstrap intervals, not multiplicity-adjusted intervals. These comparisons do not establish causality or equivalence.')
     fig.tight_layout()
     fig.savefig(FIG / "02_measures.png")
     plt.close(fig)
@@ -177,10 +174,7 @@ def fig_placebo(placebo: pd.DataFrame, metric_label: str) -> None:
     ax.tick_params(axis="y", labelsize=8.8)
     ax.set_xlabel(f"{metric_label}: with the player minus without (pp)")
     ax.set_title("The same estimate, run on everyone who missed enough games", loc="left")
-    S.caption(fig, f"Games played and missed after each name. Every Spur with at least "
-                   f"{MIN_GAMES_ON} played, {MIN_GAMES_OFF} missed, and {MIN_SPLIT_WITHIN} on "
-                   "each side inside a single season, so nobody's on/off is really one year "
-                   "against the other. Bars are 95% bootstrap intervals.")
+    S.caption(fig, 'The same whole-game estimator applied to eligible teammates. Presence means a recorded attempt; labels give counts on each side. Shared absences and team context prevent these from being independent negative controls or a power calculation. Bars are pointwise 95% bootstrap intervals.')
     fig.tight_layout()
     fig.savefig(FIG / "03_placebo.png")
     plt.close(fig)

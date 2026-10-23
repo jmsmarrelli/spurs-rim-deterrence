@@ -9,8 +9,8 @@ Three things come out of one pass over the raw season files:
 * for each opponent in each season, the shot profile it produced **in its other
   games** - the games that did not involve San Antonio.
 
-That third table is the point. Comparing the shots a defense allows against the
-league average asks the wrong question, because a defense does not play the
+That third table is the point. Comparing the shots a defence allows against the
+league average asks the wrong question, because a defence does not play the
 league average: it plays a specific schedule, and the games one player misses are
 not a random draw from it. The counterfactual for "what would Denver have shot
 here" is what Denver shot everywhere else that year.
@@ -49,7 +49,7 @@ def profile(df: pd.DataFrame) -> pd.Series:
     """Zone shares, and conversion in each zone, for any set of attempts.
 
     Both halves are needed. Where a team shoots from and whether those shots go
-    in are different questions about a defense, and the whole point of this
+    in are different questions about a defence, and the whole point of this
     project is that they can move in different directions.
     """
     n = len(df)
@@ -69,8 +69,7 @@ def main() -> None:
     for season in SEASONS:
         path = RAW / f"NBA_{season}_Shots.csv"
         if not path.exists():
-            print(f"  missing {path.name} - skipping", file=sys.stderr)
-            continue
+            raise FileNotFoundError(f"Missing required raw input: {path}")
         t0 = time.time()
         raw = pd.read_csv(path, low_memory=False)
         tidy = features.build(raw)
